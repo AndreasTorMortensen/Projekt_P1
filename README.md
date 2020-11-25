@@ -36,7 +36,7 @@ Følgende beskriver overordnet funktinalitet af udvalgte funktioner, der operere
 ### void print_plant(Plante p) ###
 Denne funktion skal på en flot og overskuelig måde udprinte en plante p, repræsenteret i form af vores Plante struktur, til terminalen. Denne bruges når listen af de egnede planter skal udprintes. 
 ### Generelle interface funktionaliteter ###
-
+Udover en funktion til at udprinte en plante, vil der uden tvivl opstå brug for andre funktioner til bruger-interaktion/terminal-interface. Eftersom dette ikke udgør en vital del af programmets kerneformål, ligger vi som udgangspunkt fokus på at få implementeret alt det bagvedliggende funktionalitet før der arbejdes for meget på bruger-interfacet.
 # Programudvikling #
 Vi har gennemgået hvordan vi som gruppe kan samarbejde om program-arbejdet, med det bedst mulige udbytte for os alle. Dette er med påtanke på at alle involverede kan forsvare samt forklare funktionaliteten af alle aspekter af programmet. Ud fra dette kom vi frem til en stykvis proces, hvor vi istedet for at uddele ansvar for at implementere individuelle funktioner hver især, istedet alle laver et foreslag til hvordan funktionen kan udformes. Disse foreslag går vi efterfølgende igennem sammen, hvor vi kan afklare hvordan vi hver især har udført opgaven, samt få svar på spørgsmål, hvis disse opstår. Ud fra denne gennemngang kan vi bestemme os samlet på én løsning vi anser som bedst. 
 
