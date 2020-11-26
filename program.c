@@ -17,24 +17,6 @@ typedef struct{
 Plante *parse_db(FILE *db);
 
 int main(void) {
-    FILE *testDB;
-    Plante *testPlante;
-    int i;
-    
-    testDB = fopen("db_biodiversitet copy.csv", "r");
-    while((testPlante = parse_db(testDB)) != NULL) {
-        printf("%s", testPlante->id);
-        printf(" %s", testPlante->ph);
-        printf(" %s", testPlante->jord);
-        printf(" %s", testPlante->fugt);
-        printf(" %d", testPlante->hjort);
-        printf(" %d", testPlante->hare);
-        printf(" %d", testPlante->fugl);
-        printf(" %d\n", testPlante->insekt);
-        free(testPlante);
-    }
-    fclose(testDB);
-
     return 0;
 }
 
