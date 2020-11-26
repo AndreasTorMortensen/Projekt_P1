@@ -5,11 +5,11 @@ typedef struct{
     char ph[20];
     char jord[20];
     char fugt[10];
-    double hjort;
-    double hare;
-    double fugl;
-    double insekt;
-    double score;
+    int hjort;
+    int hare;
+    int fugl;
+    int insekt;
+    int score;
 }Plante;
 
 int main(void) {
