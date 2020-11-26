@@ -30,7 +30,8 @@ Plante *parse_db(FILE *db) {
     char *token;
 
     if(fgets(line, 100, db) == NULL) {
-        /*Hvis EOF rammes i fgets returneres en NULL pointer*/
+        /*Hvis EOF rammes i fgets returneres en NULL pointer, og den allokerede hukkommelse frigøres*/
+        free(db_plante);
         return NULL;
     }
     else {    
