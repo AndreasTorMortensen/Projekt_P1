@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#define NUM_OF_SUGGESTIONS 3
+
 typedef struct{
     char id[25];
     char ph[20];
@@ -15,6 +17,7 @@ typedef struct{
     int score;
 }Plante;
 
+void funktion();
 Plante *parse_db(FILE *db);
 Plante *parse_input();
 int prompt_ph(Plante *p);
@@ -24,6 +27,7 @@ int prompt_hjort(Plante *p);
 int prompt_hare(Plante *p);
 int prompt_fugl(Plante *p);
 int prompt_insekt(Plante *p);
+int evaluate_score(Plante db_p, Plante input_p);
 char get_single_char();
 void clrscr();
 
@@ -31,11 +35,42 @@ void clrscr();
 int main(void) {
     FILE *db;
     Plante *db_p, *input_p;
+    Plante arr[3];
+
+    db = fopen("db_biodiversitet copy.csv", "r");
 
     input_p = parse_input();
-    free(input_p);
+    while((db_p = parse_db(db)) != NULL) {
+        printf("%s: %d\n", db_p->id, evaluate_score(*db_p, *input_p));
+        free(db_p);
+    }
 
+    free(db_p);
+    free(input_p);
+    fclose(db);
+    
     return 0;
+}
+
+/*TODO*/
+void funktion() {
+    FILE *db;
+    Plante *db_p, *input_p;
+    Plante p_arr[NUM_OF_SUGGESTIONS];
+    int score;
+
+    if((db = fopen("db_biodiversitet copy.csv", "r")) != NULL && (input_p = parse_input()) != NULL) {
+        while((db_p = parse_db(db)) != NULL) {
+            score = evaluate_score(*db_p, *input_p);
+            if(score > 0) {
+                /*TODO insert in plant array*/
+            }
+            free(db_p);
+        }
+        free(input_p);
+        fclose(db);
+    }
+    /*TODO Print plant array*/
 }
 
 /*Læser og konverterer en linje fra FILE *db til en dynamisk allokeret instans af en plante struct.
@@ -74,6 +109,8 @@ Plante *parse_db(FILE *db) {
     }
 }
 
+/*Returnerer en dynamisk allokeret instans af en plante struct ud fra dialog med brugeren
+  Hvis brugeren afbryder dialogen returneres en NULL pointer*/
 Plante *parse_input() {
     Plante *input_plante = calloc(1, sizeof(Plante));
     int input_stage = 0;
@@ -113,6 +150,9 @@ Plante *parse_input() {
     return input_plante;
 }
 
+/*Prompter og assigner brugerens input til ph variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_ph(Plante *p) {
     char input;
     int good_input = 0;
@@ -146,6 +186,9 @@ int prompt_ph(Plante *p) {
     return 1;
 }
 
+/*Prompter og assigner brugerens input til jord variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_jord(Plante *p) {
     char input;
     int good_input = 0;
@@ -179,6 +222,9 @@ int prompt_jord(Plante *p) {
     return 1;
 }
 
+/*Prompter og assigner brugerens input til fugt variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_fugt(Plante *p) {
     char input;
     int good_input = 0;
@@ -188,11 +234,11 @@ int prompt_fugt(Plante *p) {
         input = get_single_char();
         switch(input) {
             case '1':
-                strcpy(p->ph, "toer");
+                strcpy(p->fugt, "toer");
                 good_input = 1;
                 break;
             case '2':
-                strcpy(p->ph, "vaad");
+                strcpy(p->fugt, "vaad");
                 good_input = 1;
                 break;
             case 'b':
@@ -208,14 +254,17 @@ int prompt_fugt(Plante *p) {
     return 1;
 }
 
+/*Prompter og assigner brugerens input til hjort variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_hjort(Plante *p) {
     char input;
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-9 hvor vigtig er det at tiltrække hjorte?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække hjorte?\n");
         input = get_single_char();
-        if(isdigit(input)) {
+        if(input >= '0' && input <= '5') {
             p->hjort = input - '0';
             good_input = 1;
         }
@@ -232,14 +281,17 @@ int prompt_hjort(Plante *p) {
     return 1;
 }
 
+/*Prompter og assigner brugerens input til hare variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_hare(Plante *p) {
     char input;
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-9 hvor vigtig er det at tiltrække hare?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække hare?\n");
         input = get_single_char();
-        if(isdigit(input)) {
+        if(input >= '0' && input <= '5') {
             p->hare = input - '0';
             good_input = 1;
         }
@@ -256,14 +308,17 @@ int prompt_hare(Plante *p) {
     return 1;
 }
 
+/*Prompter og assigner brugerens input til fugl variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_fugl(Plante *p) {
     char input;
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-9 hvor vigtig er det at tiltrække fugle?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække fugle?\n");
         input = get_single_char();
-        if(isdigit(input)) {
+        if(input >= '0' && input <= '5') {
             p->fugl = input - '0';
             good_input = 1;
         }
@@ -280,14 +335,17 @@ int prompt_fugl(Plante *p) {
     return 1;
 }
 
+/*Prompter og assigner brugerens input til insekt variablen af planten overført som parameter
+  Der promptes indtil brugeren indtaster et godkendt input
+  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_insekt(Plante *p) {
     char input;
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-9 hvor vigtig er det at tiltrække insekter?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække insekter?\n");
         input = get_single_char();
-        if(isdigit(input)) {
+        if(input >= '0' && input <= '5') {
             p->insekt = input - '0';
             good_input = 1;
         }
@@ -304,19 +362,30 @@ int prompt_insekt(Plante *p) {
     return 1;
 }
 
-char get_single_char() {
-    char input, check;
-    
-    scanf(" %c", &input);
-    while(check = getchar() != '\n') {
-        if(!isspace(check)) {
-            return '\0';
-        }
+/*Beregner og returnere scoren af indlæst plante fra database db_p ud fra brugerens input input_p
+  Score = summen af produkterne af hjort, hare, fugl og insekt værdierne for db_p og input_p*/
+int evaluate_score(Plante db_p, Plante input_p) {
+    if(strstr(db_p.ph, input_p.ph) != NULL && strstr(db_p.jord, input_p.jord) != NULL && strstr(db_p.fugt, input_p.fugt) != NULL) {
+        return db_p.hjort*input_p.hjort+db_p.hare*input_p.hare+db_p.fugl*input_p.fugl+db_p.insekt*input_p.insekt;
     }
-    return input;
+    return 0;
 }
 
-void clrscr()
-{
+/*Læser og returnere én enkel karakter fra stdin buffer
+  Hvis der indtastes mere end 1 karakter tømmes stdin bufferen og der returneres '\0'*/
+char get_single_char() {
+    /*line skal have størrelsen 3, da der ved kald til fgets skal være plads til '\n' og '\0' karakter*/
+    char line[3];
+
+    fgets(line, 3, stdin);
+    /*Clearing af stdin buffer hvis fgets ikke har læst hele stdin bufferen*/
+    if(strchr(line, '\n') == NULL) {
+        while(getchar() != '\n');
+    }
+    /*Hvis 2. karakter i line ikke er new-line returneres '\0'*/
+    return line[1] == '\n' ? line[0] : '\0';
+}
+
+void clrscr() {
     system("clear");
 }
