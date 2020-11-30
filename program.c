@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define NUM_OF_SUGGESTIONS 3
+#define NUM_OF_SUGGESTIONS 4
 
 typedef struct{
     char id[25];
@@ -17,7 +17,11 @@ typedef struct{
     int score;
 }Plante;
 
-void funktion();
+void suggest_plants();
+void initialize_array(Plante *p_arr);
+void insert_plant(Plante *p_arr, Plante p);
+void print_array(Plante *p_arr);
+int compare_plants(const void *a, const void *b);
 Plante *parse_db(FILE *db);
 Plante *parse_input();
 int prompt_ph(Plante *p);
@@ -33,44 +37,74 @@ void clrscr();
 
 
 int main(void) {
-    FILE *db;
-    Plante *db_p, *input_p;
-    Plante arr[3];
-
-    db = fopen("db_biodiversitet copy.csv", "r");
-
-    input_p = parse_input();
-    while((db_p = parse_db(db)) != NULL) {
-        printf("%s: %d\n", db_p->id, evaluate_score(*db_p, *input_p));
-        free(db_p);
-    }
-
-    free(db_p);
-    free(input_p);
-    fclose(db);
-    
+    suggest_plants();
     return 0;
 }
 
-/*TODO*/
-void funktion() {
+/*TODO kommentar*/
+void suggest_plants() {
     FILE *db;
     Plante *db_p, *input_p;
     Plante p_arr[NUM_OF_SUGGESTIONS];
-    int score;
+    int i;
 
+    initialize_array(p_arr);
     if((db = fopen("db_biodiversitet copy.csv", "r")) != NULL && (input_p = parse_input()) != NULL) {
         while((db_p = parse_db(db)) != NULL) {
-            score = evaluate_score(*db_p, *input_p);
-            if(score > 0) {
-                /*TODO insert in plant array*/
+            db_p->score = evaluate_score(*db_p, *input_p);
+            if(db_p->score > 0) {
+                insert_plant(p_arr, *db_p);
             }
             free(db_p);
         }
         free(input_p);
         fclose(db);
     }
-    /*TODO Print plant array*/
+    qsort(p_arr, NUM_OF_SUGGESTIONS, sizeof(Plante), compare_plants);
+    print_array(p_arr);
+}
+
+/*TODO kommentar*/
+void initialize_array(Plante *p_arr) {
+    int i;
+
+    for(i = 0; i < NUM_OF_SUGGESTIONS; i++) {
+        p_arr[i].score = 0;
+    }
+}
+
+/*TODO kommentar*/
+void insert_plant(Plante *p_arr, Plante p) {
+    int lowest_score = p_arr[0].score, lowest_index = 0, i;
+
+    for(i = 1; i < NUM_OF_SUGGESTIONS; i++) {
+        if(p_arr[i].score < lowest_score) {
+            lowest_score = p_arr[i].score;
+            lowest_index = i;
+        }
+    }
+    if(p.score > lowest_score) {
+        p_arr[lowest_index] = p;
+    }   
+}
+
+/*TODO kommentar*/
+void print_array(Plante *p_arr) {
+    int i;
+
+    for(i = 0; i < NUM_OF_SUGGESTIONS; i++) {
+        if(p_arr[i].score > 0) {
+            printf("%s: %d\n", p_arr[i].id, p_arr[i].score);
+        }
+    }
+}
+
+/*TODO kommentar*/
+int compare_plants(const void *a, const void *b) {
+    Plante *pa = (Plante*) a;
+    Plante *pb = (Plante*) b;
+
+    return pb->score - pa->score;
 }
 
 /*Læser og konverterer en linje fra FILE *db til en dynamisk allokeret instans af en plante struct.
