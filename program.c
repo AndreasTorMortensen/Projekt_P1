@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define NUM_OF_SUGGESTIONS 4
+#define NUM_OF_SUGGESTIONS 5
 
 typedef struct{
     char id[25];
@@ -17,7 +17,7 @@ typedef struct{
     int score;
 }Plante;
 
-void suggest_plants();
+void suggest_plants(FILE *db);
 void initialize_array(Plante *p_arr);
 void insert_plant(Plante *p_arr, Plante p);
 void print_array(Plante *p_arr);
@@ -37,19 +37,19 @@ void clrscr();
 
 
 int main(void) {
-    suggest_plants();
+    FILE *db = fopen("db_biodiversitet copy.csv", "r");
+    suggest_plants(db);
+    fclose(db);
     return 0;
 }
 
 /*TODO kommentar*/
-void suggest_plants() {
-    FILE *db;
+void suggest_plants(FILE *db) {
     Plante *db_p, *input_p;
     Plante p_arr[NUM_OF_SUGGESTIONS];
-    int i;
 
     initialize_array(p_arr);
-    if((db = fopen("db_biodiversitet copy.csv", "r")) != NULL && (input_p = parse_input()) != NULL) {
+    if(((input_p = parse_input()) != NULL)) {
         while((db_p = parse_db(db)) != NULL) {
             db_p->score = evaluate_score(*db_p, *input_p);
             if(db_p->score > 0) {
@@ -58,10 +58,9 @@ void suggest_plants() {
             free(db_p);
         }
         free(input_p);
-        fclose(db);
+        qsort(p_arr, NUM_OF_SUGGESTIONS, sizeof(Plante), compare_plants);
+        print_array(p_arr);
     }
-    qsort(p_arr, NUM_OF_SUGGESTIONS, sizeof(Plante), compare_plants);
-    print_array(p_arr);
 }
 
 /*TODO kommentar*/
@@ -89,6 +88,7 @@ void insert_plant(Plante *p_arr, Plante p) {
 }
 
 /*TODO kommentar*/
+/*Hvis der ikke er fundet nogen foreslag printes der en meddelelse*/
 void print_array(Plante *p_arr) {
     int i;
 
@@ -421,5 +421,5 @@ char get_single_char() {
 }
 
 void clrscr() {
-    system("clear");
+    system("cls || clear");
 }
