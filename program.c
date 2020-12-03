@@ -21,6 +21,7 @@ void print_array(Plante *p_arr, int n);
 int compare_plants(const void *a, const void *b);
 Plante *parse_db(FILE *db);
 Plante *parse_input();
+int check_input(Plante p);
 int prompt_ph(Plante *p);
 int prompt_jord(Plante *p);
 int prompt_fugt(Plante *p);
@@ -102,7 +103,6 @@ int compare_plants(const void *a, const void *b) {
 Plante *parse_db(FILE *db) {
     Plante *db_plante = (Plante*) calloc(1, sizeof(Plante));
     char line[100];
-    int test;
     char *token;
 
     if(fgets(line, 100, db) == NULL) {
@@ -137,41 +137,67 @@ Plante *parse_db(FILE *db) {
   Hvis brugeren afbryder dialogen returneres en NULL pointer*/
 Plante *parse_input() {
     Plante *input_plante = calloc(1, sizeof(Plante));
-    int input_stage = 0;
-    clrscr();
-    while(input_stage >= 0 && input_stage <= 6) {
-        switch(input_stage) {
-            case 0:
-                input_stage += prompt_ph(input_plante) ? 1 : -1;
+    char input;
+    int good_input = 0;
+
+    memset(input_plante, 0, sizeof(Plante));
+
+    while(!good_input) {
+        printf("1 - pH \t\t %s\n2 - Jord \t %s\n3 - Fugt \t %s\n4 - Hjort \t %d\n5 - Hare \t %d\n6 - Fugl \t %d\n7 - Insekt \t %d\nn - Søg med valgte parametre\nb - Afbryd\n", 
+                input_plante->ph, input_plante->jord, input_plante->fugt, input_plante->hjort, input_plante->hare, input_plante->fugl,input_plante->insekt);
+
+        input = get_single_char();
+        clrscr();
+        switch(input) {
+            case '1':
+                prompt_ph(input_plante);
                 break;
-            case 1:
-                input_stage += prompt_jord(input_plante) ? 1 : -1;
+            case '2':
+                prompt_jord(input_plante);
                 break;
-            case 2:
-                input_stage += prompt_fugt(input_plante) ? 1 : -1;
+            case '3':
+                prompt_fugt(input_plante);
                 break;
-            case 3:
-                input_stage += prompt_hjort(input_plante) ? 1 : -1;
+            case '4':
+                prompt_hjort(input_plante);
                 break;
-            case 4:
-                input_stage += prompt_hare(input_plante) ? 1 : -1;
+            case '5':
+                prompt_hare(input_plante);
                 break;
-            case 5:
-                input_stage += prompt_fugl(input_plante) ? 1 : -1;
+            case '6':
+                prompt_fugl(input_plante);
                 break;
-            case 6:
-                input_stage += prompt_insekt(input_plante) ? 1 : -1;
+            case '7':
+                prompt_insekt(input_plante);
                 break;
+            case 'n':
+                if(check_input(*input_plante)) {
+                    good_input = 1;
+                }
+                else {
+                    good_input = 0;
+                }
+                break;
+            case 'b':
+                return NULL;
             default:
+                printf("Forkert indtastning, prøv igen!\n");
                 break;
         }
     }
-
-    if(input_stage < 0) {
-        free(input_plante);
-        return NULL;
-    }
     return input_plante;
+}
+
+int check_input(Plante p) {
+    if(p.ph[0] == '\0' || p.jord[0] == '\0' || p.fugt[0] == '\0') {
+        printf("Der SKAL vælges ph, jord, og fugtighed!\n");
+        return 0;
+    }
+    else if(p.hjort == 0 && p.hare == 0 && p.fugl == 0 && p.insekt == 0) {
+        printf("Minimum ÉN dyregruppe skal have en vægt højere end 0\n");
+        return 0;
+    }
+    return 1;
 }
 
 /*Prompter og assigner brugerens input til ph variablen af planten overført som parameter
