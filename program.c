@@ -3,8 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#define NUM_OF_SUGGESTIONS 5
-
 typedef struct{
     char id[25];
     char ph[20];
@@ -17,10 +15,9 @@ typedef struct{
     int score;
 }Plante;
 
-void suggest_plants(FILE *db);
-void initialize_array(Plante *p_arr);
-void insert_plant(Plante *p_arr, Plante p);
-void print_array(Plante *p_arr);
+void suggest_plants(FILE *db, int n);
+void insert_plant(Plante *p_arr, Plante p, int n);
+void print_array(Plante *p_arr, int n);
 int compare_plants(const void *a, const void *b);
 Plante *parse_db(FILE *db);
 Plante *parse_input();
@@ -38,45 +35,37 @@ void clrscr();
 
 int main(void) {
     FILE *db = fopen("db_biodiversitet copy.csv", "r");
-    suggest_plants(db);
+    suggest_plants(db, 2);
     fclose(db);
     return 0;
 }
 
 /*TODO kommentar*/
-void suggest_plants(FILE *db) {
+void suggest_plants(FILE *db, int n) {
     Plante *db_p, *input_p;
-    Plante p_arr[NUM_OF_SUGGESTIONS];
+    Plante *p_arr = (Plante*) calloc(n, sizeof(Plante));
 
-    initialize_array(p_arr);
+    memset(p_arr, 0, n*sizeof(Plante));
     if(((input_p = parse_input()) != NULL)) {
         while((db_p = parse_db(db)) != NULL) {
             db_p->score = evaluate_score(*db_p, *input_p);
             if(db_p->score > 0) {
-                insert_plant(p_arr, *db_p);
+                insert_plant(p_arr, *db_p, n);
             }
             free(db_p);
         }
         free(input_p);
-        qsort(p_arr, NUM_OF_SUGGESTIONS, sizeof(Plante), compare_plants);
-        print_array(p_arr);
+        qsort(p_arr, n, sizeof(Plante), compare_plants);
+        print_array(p_arr, n);
     }
+    free(p_arr);
 }
 
 /*TODO kommentar*/
-void initialize_array(Plante *p_arr) {
-    int i;
-
-    for(i = 0; i < NUM_OF_SUGGESTIONS; i++) {
-        p_arr[i].score = 0;
-    }
-}
-
-/*TODO kommentar*/
-void insert_plant(Plante *p_arr, Plante p) {
+void insert_plant(Plante *p_arr, Plante p, int n) {
     int lowest_score = p_arr[0].score, lowest_index = 0, i;
 
-    for(i = 1; i < NUM_OF_SUGGESTIONS; i++) {
+    for(i = 1; i < n; i++) {
         if(p_arr[i].score < lowest_score) {
             lowest_score = p_arr[i].score;
             lowest_index = i;
@@ -89,10 +78,10 @@ void insert_plant(Plante *p_arr, Plante p) {
 
 /*TODO kommentar*/
 /*Hvis der ikke er fundet nogen foreslag printes der en meddelelse*/
-void print_array(Plante *p_arr) {
+void print_array(Plante *p_arr, int n) {
     int i;
 
-    for(i = 0; i < NUM_OF_SUGGESTIONS; i++) {
+    for(i = 0; i < n; i++) {
         if(p_arr[i].score > 0) {
             printf("%s: %d\n", p_arr[i].id, p_arr[i].score);
         }
@@ -113,6 +102,7 @@ int compare_plants(const void *a, const void *b) {
 Plante *parse_db(FILE *db) {
     Plante *db_plante = (Plante*) calloc(1, sizeof(Plante));
     char line[100];
+    int test;
     char *token;
 
     if(fgets(line, 100, db) == NULL) {
