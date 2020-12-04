@@ -1,105 +1,9 @@
-#include <stdio.h>
+#include "core.h"
+#include "util.h"
+#include <string.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-typedef struct{
-    char id[25];
-    char ph[20];
-    char jord[20];
-    char fugt[10];
-    int hjort;
-    int hare;
-    int fugl;
-    int insekt;
-    int score;
-}Plante;
-
-void suggest_plants(FILE *db, int n);
-void insert_plant(Plante *p_arr, Plante p, int n);
-void print_array(Plante *p_arr, int n);
-int compare_plants(const void *a, const void *b);
-Plante *parse_db(FILE *db);
-Plante *parse_input();
-int check_input(Plante p);
-int prompt_ph(Plante *p);
-int prompt_jord(Plante *p);
-int prompt_fugt(Plante *p);
-int prompt_hjort(Plante *p);
-int prompt_hare(Plante *p);
-int prompt_fugl(Plante *p);
-int prompt_insekt(Plante *p);
-int evaluate_score(Plante db_p, Plante input_p);
-char get_single_char();
-void clrscr();
-
-
-int main(void) {
-    FILE *db = fopen("db_biodiversitet copy.csv", "r");
-    suggest_plants(db, 2);
-    fclose(db);
-    return 0;
-}
-
-/*TODO kommentar*/
-void suggest_plants(FILE *db, int n) {
-    Plante *db_p, *input_p;
-    Plante *p_arr = (Plante*) calloc(n, sizeof(Plante));
-
-    memset(p_arr, 0, n*sizeof(Plante));
-    if(((input_p = parse_input()) != NULL)) {
-        while((db_p = parse_db(db)) != NULL) {
-            db_p->score = evaluate_score(*db_p, *input_p);
-            if(db_p->score > 0) {
-                insert_plant(p_arr, *db_p, n);
-            }
-            free(db_p);
-        }
-        free(input_p);
-        qsort(p_arr, n, sizeof(Plante), compare_plants);
-        print_array(p_arr, n);
-    }
-    free(p_arr);
-}
-
-/*TODO kommentar*/
-void insert_plant(Plante *p_arr, Plante p, int n) {
-    int lowest_score = p_arr[0].score, lowest_index = 0, i;
-
-    for(i = 1; i < n; i++) {
-        if(p_arr[i].score < lowest_score) {
-            lowest_score = p_arr[i].score;
-            lowest_index = i;
-        }
-    }
-    if(p.score > lowest_score) {
-        p_arr[lowest_index] = p;
-    }   
-}
-
-/*TODO kommentar*/
-/*Hvis der ikke er fundet nogen foreslag printes der en meddelelse*/
-void print_array(Plante *p_arr, int n) {
-    int i;
-
-    for(i = 0; i < n; i++) {
-        if(p_arr[i].score > 0) {
-            printf("%s: %d\n", p_arr[i].id, p_arr[i].score);
-        }
-    }
-}
-
-/*TODO kommentar*/
-int compare_plants(const void *a, const void *b) {
-    Plante *pa = (Plante*) a;
-    Plante *pb = (Plante*) b;
-
-    return pb->score - pa->score;
-}
-
-/*Læser og konverterer en linje fra FILE *db til en dynamisk allokeret instans af en plante struct.
-  Pointeren til plante structen returneres.
-  Hvis fil pointeren er nået til EOF returneres en NULL pointer.*/
 Plante *parse_db(FILE *db) {
     Plante *db_plante = (Plante*) calloc(1, sizeof(Plante));
     char line[100];
@@ -133,8 +37,6 @@ Plante *parse_db(FILE *db) {
     }
 }
 
-/*Returnerer en dynamisk allokeret instans af en plante struct ud fra dialog med brugeren
-  Hvis brugeren afbryder dialogen returneres en NULL pointer*/
 Plante *parse_input() {
     Plante *input_plante = calloc(1, sizeof(Plante));
     char input;
@@ -200,9 +102,6 @@ int check_input(Plante p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til ph variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_ph(Plante *p) {
     char input;
     int good_input = 0;
@@ -236,9 +135,6 @@ int prompt_ph(Plante *p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til jord variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_jord(Plante *p) {
     char input;
     int good_input = 0;
@@ -272,9 +168,6 @@ int prompt_jord(Plante *p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til fugt variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_fugt(Plante *p) {
     char input;
     int good_input = 0;
@@ -304,9 +197,6 @@ int prompt_fugt(Plante *p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til hjort variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_hjort(Plante *p) {
     char input;
     int good_input = 0;
@@ -331,9 +221,6 @@ int prompt_hjort(Plante *p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til hare variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_hare(Plante *p) {
     char input;
     int good_input = 0;
@@ -358,9 +245,6 @@ int prompt_hare(Plante *p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til fugl variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_fugl(Plante *p) {
     char input;
     int good_input = 0;
@@ -385,9 +269,6 @@ int prompt_fugl(Plante *p) {
     return 1;
 }
 
-/*Prompter og assigner brugerens input til insekt variablen af planten overført som parameter
-  Der promptes indtil brugeren indtaster et godkendt input
-  Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
 int prompt_insekt(Plante *p) {
     char input;
     int good_input = 0;
@@ -412,30 +293,9 @@ int prompt_insekt(Plante *p) {
     return 1;
 }
 
-/*Beregner og returnere scoren af indlæst plante fra database db_p ud fra brugerens input input_p
-  Score = summen af produkterne af hjort, hare, fugl og insekt værdierne for db_p og input_p*/
 int evaluate_score(Plante db_p, Plante input_p) {
     if(strstr(db_p.ph, input_p.ph) != NULL && strstr(db_p.jord, input_p.jord) != NULL && strstr(db_p.fugt, input_p.fugt) != NULL) {
         return db_p.hjort*input_p.hjort+db_p.hare*input_p.hare+db_p.fugl*input_p.fugl+db_p.insekt*input_p.insekt;
     }
     return 0;
-}
-
-/*Læser og returnere én enkel karakter fra stdin buffer
-  Hvis der indtastes mere end 1 karakter tømmes stdin bufferen og der returneres '\0'*/
-char get_single_char() {
-    /*line skal have størrelsen 3, da der ved kald til fgets skal være plads til '\n' og '\0' karakter*/
-    char line[3];
-
-    fgets(line, 3, stdin);
-    /*Clearing af stdin buffer hvis fgets ikke har læst hele stdin bufferen*/
-    if(strchr(line, '\n') == NULL) {
-        while(getchar() != '\n');
-    }
-    /*Hvis 2. karakter i line ikke er new-line returneres '\0'*/
-    return line[1] == '\n' ? line[0] : '\0';
-}
-
-void clrscr() {
-    system("cls || clear");
 }
