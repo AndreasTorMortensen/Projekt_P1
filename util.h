@@ -11,4 +11,6 @@ void insert_plant(Plante *p_arr, Plante p, int n);
 
 void print_array(Plante *p_arr, int n);
 
+int compare_plants(const void *a, const void *b);
+
 #endif

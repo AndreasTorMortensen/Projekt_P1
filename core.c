@@ -90,10 +90,76 @@ int check_input(Plante p) {
 }
 
 int check_db(Plante p) {
-    if(strstr(DB_PH_VALUES, p.ph) == NULL || strstr(DB_JORD_VALUES, p.jord) == NULL || strstr(DB_FUGT_VALUES, p.fugt) == NULL) {
-        return 0;
+    if(check_ph(p) && check_jord(p) && check_fugt(p)) {
+        return 1;
+    }  
+    return 0;
+}
+
+int check_ph(Plante p) {
+    int i = 0, prev_i = 0;
+    char buffer[15] = "";
+
+    while(i < PH_MAX_LEN) {
+        if(p.ph[i] == ';' || p.ph[i] == '\0') {
+            strncpy(buffer, &p.ph[prev_i], i-prev_i);
+            if(strcmp(buffer, "basisk") != 0 && strcmp(buffer, "neutral") != 0 && strcmp(buffer, "sur") != 0) {
+                return 0;
+            }
+            else if(p.ph[i] == '\0') {
+                break;
+            }
+            memset(buffer, 0, sizeof(buffer));
+            prev_i = i+1;
+        }
+        i++;
     }
-    return 1;      
+
+    return 1;
+}
+
+int check_jord(Plante p) {
+    int i = 0, prev_i = 0;
+    char buffer[15] = "";
+
+    while(i < JORD_MAX_LEN) {
+        if(p.jord[i] == ';' || p.jord[i] == '\0') {
+            strncpy(buffer, &p.jord[prev_i], i-prev_i);
+            if(strcmp(buffer, "let") != 0 && strcmp(buffer, "blandet") != 0 && strcmp(buffer, "haard") != 0) {
+                return 0;
+            }
+            else if(p.jord[i] == '\0') {
+                break;
+            }
+            memset(buffer, 0, sizeof(buffer));
+            prev_i = i+1;
+        }
+        i++;
+    }
+
+    return 1;
+}
+
+int check_fugt(Plante p) {
+    int i = 0, prev_i = 0;
+    char buffer[15] = "";
+
+    while(i < FUGT_MAX_LEN) {
+        if(p.fugt[i] == ';' || p.fugt[i] == '\0') {
+            strncpy(buffer, &p.fugt[prev_i], i-prev_i);
+            if(strcmp(buffer, "vaad") != 0 && strcmp(buffer, "toer") != 0) {
+                return 0;
+            }
+            else if(p.fugt[i] == '\0') {
+                break;
+            }
+            memset(buffer, 0, sizeof(buffer));
+            prev_i = i+1;
+        }
+        i++;
+    }   
+
+    return 1;
 }
 
 int prompt_ph(Plante *p) {

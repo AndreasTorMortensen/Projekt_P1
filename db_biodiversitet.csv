@@ -1,4 +1,4 @@
-Blodkloever,basisk;neutral,blandet,toer,3,3,2,3
+Blodkloever,basisk;neutral,blandet,toer,3%,3,2,3
 Boghvede,sur,blandet,vaad,0,0,3,2
 Gul Lupin,sur,let,toer,3,3,2,0
 Gul Sennep,basisk,haard,vaad,0,0,3,2
@@ -7,7 +7,7 @@ Gul Stenkloever,basisk;neutral,blandet;haard,toer,1,0,0,3
 Roedkloever,basisk;neutral,haard,vaad,3,3,3,3
 Hirse,basisk,let,toer,0,0,3,0
 Aerter,neutral,let;blandet,vaad,2,1,3,0
-Hesteboenner,basisk;neutral;blandet;haard,vaad;toer,1,1,3,2
+Hesteboenner,basisk;neutral,blandet;haard,vaad;toer,1,1,3,2
 Havre,basisk;neutral,let,vaad;toer,3,0,3,0
 Kaellingetaend,neutral;sur,let;blandet,toer,3,3,2,0
 Hvidkloever,basisk;neutral,blandet;haard,vaad,4,3,2,3

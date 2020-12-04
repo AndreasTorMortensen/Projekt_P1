@@ -21,7 +21,7 @@ void suggest_plants(FILE *db, int n) {
     int db_counter = 1;
 
     memset(p_arr, 0, n*sizeof(Plante));
-    
+
     if((input_p = parse_input()) != NULL) {
 
         while((db_p = parse_db(db)) != NULL) {
@@ -45,13 +45,3 @@ void suggest_plants(FILE *db, int n) {
     }
     free(p_arr);
 }
-
-/*TODO kommentar*/
-int compare_plants(const void *a, const void *b) {
-    Plante *pa = (Plante*) a;
-    Plante *pb = (Plante*) b;
-
-    return pb->score - pa->score;
-}
-
-

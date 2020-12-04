@@ -50,3 +50,11 @@ void print_array(Plante *p_arr, int n) {
         }
     }
 }
+
+/*TODO kommentar*/
+int compare_plants(const void *a, const void *b) {
+    Plante *pa = (Plante*) a;
+    Plante *pb = (Plante*) b;
+
+    return pb->score - pa->score;
+}
