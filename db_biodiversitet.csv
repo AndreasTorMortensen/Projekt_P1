@@ -1,20 +1,20 @@
-Blodkloever,basisk;neutral,blandet,toer,maj;september,3,3,2,3,enaarig
-Boghvede,sur,blandet,vaad,maj;august,0,0,3,2,enaarig
-Gul Lupin,sur,let,toer,april;juni,3,3,2,0,enaarig
-Gul Sennep,basisk,haard,vaad,april;maj,0,0,3,2,enaarig
-Oliehoer,neutral,let,toer,april;juni,1,0,3,3,enaarig
-Gul Stenkloever,basisk;neutral,blandet;haard,toer,april;august,1,0,0,3,fleraarig
-Roedkloever,basisk;neutral,haard,vaad,april;august,3,3,3,3,fleraarig
-Hirse,basisk,let,toer,april;januar,0,0,3,0,enaarig
-Aerter,neutral,let;blandet,vaad,maj;september,2,1,3,0,enaarig
-Hesteboenner,basisk;neutral,blandet;haard,vaad;toer,marts;marts,1,1,3,2,enaarig
-Havre,basisk;neutral,let,vaad;toer,juni;juli,3,0,3,0,enaarig
-Kaellingetaend,sur;neutral,let;blandet,toer,april;september,3,3,2,0,fleraarig
-Hvidkloever,basisk;neutral,blandet;haard,vaad,juni;september,4,3,2,3,fleraarig
-Quinoa,neutral,let,vaad,marts;juni,0,0,3,0,enaarig
-Hundgraes,basisk;sur,let,vaad,maj;august,0,0,3,3,fleraarig
-Jordskokker,neutral,let;blandet,toer,april;maj,2,0,3,0,fleraarig
-Honningurt,basisk;neutral,let;blandet,toer,april;august,0,0,3,4,enaarig
-Lucerne,basisk;neutral,blandet;haard,toer,april;juni,3,3,0,3,fleraarig
-Fodermarvkaal,neutral,let,vaad,marts;maj,3,3,2,0,fleraarig
-Solsikke,basisk;neutral,let;blandet,toer,maj;juni,0,0,2,2,enaarig
+Blodkloever,basisk;neutral,blandet,toer,3,3,2,3
+Boghvede,sur,blandet,vaad,0,0,3,2
+Gul Lupin,sur,let,toer,3,3,2,0
+Gul Sennep,basisk,haard,vaad,0,0,3,2
+Oliehoer,neutral,let,toer,1,0,3,3
+Gul Stenkloever,basisk;neutral,blandet;haard,toer,1,0,0,3
+Roedkloever,basisk;neutral,haard,vaad,3,3,3,3
+Hirse,basisk,let,toer,0,0,3,0
+Aerter,neutral,let;blandet,vaad,2,1,3,0
+Hesteboenner,basisk;neutral,blandet;haard,vaad;toer,1,1,3,2
+Havre,basisk;neutral,let,vaad;toer,3,0,3,0
+Kaellingetaend,neutral;sur,let;blandet,toer,3,3,2,0
+Hvidkloever,basisk;neutral,blandet;haard,vaad,4,3,2,3
+Quinoa,neutral,let,vaad,0,0,3,0
+Hundgraes,sur,let,vaad,0,0,3,3
+Jordskokker,neutral,let;blandet,toer,2,0,3,0
+Honningurt,basisk;neutral,let;blandet,toer,0,0,3,4
+Lucerne,basisk;neutral,blandet;haard,toer,3,3,0,3
+Fodermarvkaal,neutral,let,vaad,3,3,2,0
+Solsikke,basisk;neutral,let;blandet,toer,0,0,2,2
