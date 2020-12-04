@@ -16,6 +16,9 @@ Plante *parse_input();
 /*TODO KOMMENTAR*/
 int check_input(Plante p);
 
+/*TODO KOMMENTAR*/
+int check_db(Plante p);
+
 /*Prompter og assigner brugerens input til ph variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/

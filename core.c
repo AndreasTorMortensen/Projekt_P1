@@ -4,37 +4,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define DB_PH_VALUES "basisk;neutral;sur"
+#define DB_JORD_VALUES "let;blandet;haard"
+#define DB_FUGT_VALUES "vaad;toer"
+
 Plante *parse_db(FILE *db) {
     Plante *db_plante = (Plante*) calloc(1, sizeof(Plante));
+    int scanned = 0;
     char line[100];
-    char *token;
-
-    if(fgets(line, 100, db) == NULL) {
-        /*Hvis EOF rammes i fgets returneres en NULL pointer, og den allokerede hukkommelse frigøres*/
-        free(db_plante);
-        return NULL;
+    if(fgets(line, 100, db) != NULL) {
+        scanned = sscanf(line, "%[^,] , %[^,] , %[^,] , %[^,] , %d , %d , %d , %d", db_plante->id, db_plante->ph, db_plante->jord, db_plante->fugt, 
+                                                                                    &db_plante->hjort, &db_plante->hare, &db_plante->fugl, &db_plante->insekt);
+        if(scanned == 8 && check_db(*db_plante)) {
+            return db_plante;
+        }
     }
-    else {    
-        /*Den læste linje indeles i tokens adskilt af ',' - disse assignes til plantens variabler*/
-        token = strtok(line, ",");
-        strcpy(db_plante->id, token);
-        token = strtok(NULL, ",");
-        strcpy(db_plante->ph, token);
-        token = strtok(NULL, ",");
-        strcpy(db_plante->jord, token);
-        token = strtok(NULL, ",");
-        strcpy(db_plante->fugt, token);
-        token = strtok(NULL, ",");
-        db_plante->hjort = atoi(token);
-        token = strtok(NULL, ",");
-        db_plante->hare = atoi(token);
-        token = strtok(NULL, ",");
-        db_plante->fugl = atoi(token);
-        token = strtok(NULL, ",");
-        db_plante->insekt = atoi(token);
-
-        return db_plante;
-    }
+    /*Hvis EOF rammes i fgets, eller indscanning fejler returneres en NULL pointer, og den allokerede hukkommelse frigøres*/
+    free(db_plante);
+    return NULL;
 }
 
 Plante *parse_input() {
@@ -100,6 +87,13 @@ int check_input(Plante p) {
         return 0;
     }
     return 1;
+}
+
+int check_db(Plante p) {
+    if(strstr(DB_PH_VALUES, p.ph) == NULL || strstr(DB_JORD_VALUES, p.jord) == NULL || strstr(DB_FUGT_VALUES, p.fugt) == NULL) {
+        return 0;
+    }
+    return 1;      
 }
 
 int prompt_ph(Plante *p) {

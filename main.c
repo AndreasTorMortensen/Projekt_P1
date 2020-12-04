@@ -18,19 +18,30 @@ int main(void) {
 void suggest_plants(FILE *db, int n) {
     Plante *db_p, *input_p;
     Plante *p_arr = (Plante*) calloc(n, sizeof(Plante));
+    int db_counter = 1;
 
     memset(p_arr, 0, n*sizeof(Plante));
-    if(((input_p = parse_input()) != NULL)) {
+    
+    if((input_p = parse_input()) != NULL) {
+
         while((db_p = parse_db(db)) != NULL) {
             db_p->score = evaluate_score(*db_p, *input_p);
             if(db_p->score > 0) {
                 insert_plant(p_arr, *db_p, n);
             }
+            db_counter++;
             free(db_p);
         }
+
+        if(feof(db)) {
+            qsort(p_arr, n, sizeof(Plante), compare_plants);
+            print_array(p_arr, n);
+        }
+        else {
+            printf("End of database was not reached, failed at line: %d\n", db_counter);
+        }
+
         free(input_p);
-        qsort(p_arr, n, sizeof(Plante), compare_plants);
-        print_array(p_arr, n);
     }
     free(p_arr);
 }
