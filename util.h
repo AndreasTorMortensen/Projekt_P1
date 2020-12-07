@@ -1,6 +1,5 @@
 #ifndef Util_h
 #define Util_h
-
 #include "plante.h"
 
 char get_single_char();

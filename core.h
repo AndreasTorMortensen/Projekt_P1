@@ -31,37 +31,37 @@ int check_fugt(Plante p);
 /*Prompter og assigner brugerens input til ph variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_ph(Plante *p);
+void prompt_ph(Plante *p);
 
 /*Prompter og assigner brugerens input til jord variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_jord(Plante *p);
+void prompt_jord(Plante *p);
 
 /*Prompter og assigner brugerens input til fugt variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_fugt(Plante *p);
+void prompt_fugt(Plante *p);
 
 /*Prompter og assigner brugerens input til hjort variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_hjort(Plante *p);
+void prompt_hjort(Plante *p);
 
 /*Prompter og assigner brugerens input til hare variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_hare(Plante *p);
+void prompt_hare(Plante *p);
 
 /*Prompter og assigner brugerens input til fugl variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_fugl(Plante *p);
+void prompt_fugl(Plante *p);
 
 /*Prompter og assigner brugerens input til insekt variablen af planten overført som parameter
   Der promptes indtil brugeren indtaster et godkendt input
   Ved accepteret input returneres 0, hvis brugeren indtaster 'b', ellers 1*/
-int prompt_insekt(Plante *p);
+void prompt_insekt(Plante *p);
 
 /*Beregner og returnere scoren af indlæst plante fra database db_p ud fra brugerens input input_p
   Score = summen af produkterne af hjort, hare, fugl og insekt værdierne for db_p og input_p*/
