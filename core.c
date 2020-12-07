@@ -160,7 +160,7 @@ int check_fugt(Plante p) {
     return 1;
 }
 
-int prompt_ph(Plante *p) {
+void prompt_ph(Plante *p) {
     char input;
     int good_input = 0;
 
@@ -193,7 +193,7 @@ int prompt_ph(Plante *p) {
     return 1;
 }
 
-int prompt_jord(Plante *p) {
+void prompt_jord(Plante *p) {
     char input;
     int good_input = 0;
 
@@ -226,7 +226,7 @@ int prompt_jord(Plante *p) {
     return 1;
 }
 
-int prompt_fugt(Plante *p) {
+void prompt_fugt(Plante *p) {
     char input;
     int good_input = 0;
 
@@ -255,7 +255,7 @@ int prompt_fugt(Plante *p) {
     return 1;
 }
 
-int prompt_hjort(Plante *p) {
+void prompt_hjort(Plante *p) {
     char input;
     int good_input = 0;
 
@@ -279,7 +279,7 @@ int prompt_hjort(Plante *p) {
     return 1;
 }
 
-int prompt_hare(Plante *p) {
+void prompt_hare(Plante *p) {
     char input;
     int good_input = 0;
 
@@ -303,7 +303,7 @@ int prompt_hare(Plante *p) {
     return 1;
 }
 
-int prompt_fugl(Plante *p) {
+void prompt_fugl(Plante *p) {
     char input;
     int good_input = 0;
 
@@ -327,7 +327,7 @@ int prompt_fugl(Plante *p) {
     return 1;
 }
 
-int prompt_insekt(Plante *p) {
+void prompt_insekt(Plante *p) {
     char input;
     int good_input = 0;
 
