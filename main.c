@@ -3,14 +3,23 @@
 #include "core.h"
 #include "util.h"
 #include "plante.h"
+#define DB_FILE "db_biodiversitet.csv"
+
 
 void suggest_plants(FILE *db, int n);
-int compare_plants(const void *a, const void *b);
 
 int main(void) {
-    FILE *db = fopen("db_biodiversitet.csv", "r");
-    suggest_plants(db, 2);
+    FILE *db = fopen(DB_FILE, "r");
+    char input;
+
+    do {
+        clrscr();
+        suggest_plants(db, 5);
+        printf("Tast 'b' for at afslutte, enter for at indtaste igen.\n");
+    } while ((input = get_single_char()) != 'b');
+
     fclose(db);
+
     return 0;
 }
 
@@ -40,8 +49,8 @@ void suggest_plants(FILE *db, int n) {
         else {
             printf("End of database was not reached, failed at line: %d\n", db_counter);
         }
-
         free(input_p);
     }
     free(p_arr);
+    rewind(db);
 }
