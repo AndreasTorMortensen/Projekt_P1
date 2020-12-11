@@ -3,9 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef _WIN32
+#define CLEAR_STR "cls"
+#elif defined(__linux)
+#define CLEAR_STR "clear"
+#endif
 
-/*Læser og returnere én enkel karakter fra stdin buffer
-  Hvis der indtastes mere end 1 karakter tømmes stdin bufferen og der returneres '\0'*/
 char get_single_char() {
     /*line skal have størrelsen 3, da der ved kald til fgets skal være plads til '\n' og '\0' karakter*/
     char line[3];
@@ -19,12 +22,10 @@ char get_single_char() {
     return line[1] == '\n' ? line[0] : '\0';
 }
 
-/*TODO kommentar*/
 void clrscr() {
-    system("cls || clear");
+    system(CLEAR_STR);
 }
 
-/*TODO kommentar*/
 void insert_plant(Plante *p_arr, Plante p, int n) {
     int lowest_score = p_arr[0].score, lowest_index = 0, i;
 
@@ -39,8 +40,6 @@ void insert_plant(Plante *p_arr, Plante p, int n) {
     }   
 }
 
-/*TODO kommentar*/
-/*Hvis der ikke er fundet nogen foreslag printes der en meddelelse*/
 void print_array(Plante *p_arr, int n) {
     int i;
 
@@ -51,7 +50,6 @@ void print_array(Plante *p_arr, int n) {
     }
 }
 
-/*TODO kommentar*/
 int compare_plants(const void *a, const void *b) {
     Plante *pa = (Plante*) a;
     Plante *pb = (Plante*) b;

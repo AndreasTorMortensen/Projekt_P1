@@ -6,7 +6,7 @@
 #define FUGT_MAX_LEN 10
 
 
-typedef struct{
+struct planteStruct{
     char id[ID_MAX_LEN];
     char ph[PH_MAX_LEN];
     char jord[JORD_MAX_LEN];
@@ -16,6 +16,8 @@ typedef struct{
     int fugl;
     int insekt;
     int score;
-}Plante;
+};
+
+typedef struct planteStruct Plante;
 
 #endif
