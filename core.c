@@ -124,7 +124,7 @@ int check_jord(Plante p) {
     while(i < JORD_MAX_LEN) {
         if(p.jord[i] == ';' || p.jord[i] == '\0') {
             strncpy(buffer, &p.jord[prev_i], i-prev_i);
-            if(strcmp(buffer, "let") != 0 && strcmp(buffer, "blandet") != 0 && strcmp(buffer, "haard") != 0) {
+            if(strcmp(buffer, "let") != 0 && strcmp(buffer, "blandet") != 0 && strcmp(buffer, "hård") != 0) {
                 return 0;
             }
             else if(p.jord[i] == '\0') {
@@ -146,7 +146,7 @@ int check_fugt(Plante p) {
     while(i < FUGT_MAX_LEN) {
         if(p.fugt[i] == ';' || p.fugt[i] == '\0') {
             strncpy(buffer, &p.fugt[prev_i], i-prev_i);
-            if(strcmp(buffer, "vaad") != 0 && strcmp(buffer, "toer") != 0) {
+            if(strcmp(buffer, "våd") != 0 && strcmp(buffer, "tør") != 0) {
                 return 0;
             }
             else if(p.fugt[i] == '\0') {
@@ -210,7 +210,7 @@ void prompt_jord(Plante *p) {
                 good_input = 1;
                 break;
             case '3':
-                strcpy(p->jord, "haard");
+                strcpy(p->jord, "hård");
                 good_input = 1;
                 break;
             case 'b':
@@ -234,11 +234,11 @@ void prompt_fugt(Plante *p) {
         input = get_single_char();
         switch(input) {
             case '1':
-                strcpy(p->fugt, "toer");
+                strcpy(p->fugt, "tør");
                 good_input = 1;
                 break;
             case '2':
-                strcpy(p->fugt, "vaad");
+                strcpy(p->fugt, "våd");
                 good_input = 1;
                 break;
             case 'b':

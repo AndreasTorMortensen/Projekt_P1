@@ -42,10 +42,10 @@ void insert_plant(Plante *p_arr, Plante p, int n) {
 
 void print_array(Plante *p_arr, int n) {
     int i;
-
+    printf("%-2s %-25s Score\n", "#","Plante ID");
     for(i = 0; i < n; i++) {
         if(p_arr[i].score > 0) {
-            printf("%s: %d\n", p_arr[i].id, p_arr[i].score);
+            printf("%-2d %-25s %d\n", i+1, p_arr[i].id, p_arr[i].score);
         }
     }
 }
