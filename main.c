@@ -17,7 +17,8 @@ int main(void) {
         suggest_plants(db, 5);
         printf("Tast 'b' for at afslutte, enter for at indtaste igen.\n");
     } while ((input = get_single_char()) != 'b');
-
+    
+    clrscr();
     fclose(db);
 
     return 0;

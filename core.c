@@ -9,14 +9,16 @@
 Plante *parse_db(FILE *db) {
     Plante *db_plante = (Plante*) calloc(1, sizeof(Plante));
     int scanned = 0;
-    char line[100];
-    if(fgets(line, 100, db) != NULL) {
-        scanned = sscanf(line, "%[^,] , %[^,] , %[^,] , %[^,] , %d , %d , %d , %d", db_plante->id, db_plante->ph, db_plante->jord, db_plante->fugt, 
-                                                                                    &db_plante->hjort, &db_plante->hare, &db_plante->fugl, &db_plante->insekt);
-        if(scanned == 8 && check_db(*db_plante)) {
-            return db_plante;
+    char line[100] = "";
+    do {
+        if(fgets(line, 100, db) != NULL) {
+            scanned = sscanf(line, "%[^,] , %[^,] , %[^,] , %[^,] , %d , %d , %d , %d", db_plante->id, db_plante->ph, db_plante->jord, db_plante->fugt, 
+                                                                                        &db_plante->hjort, &db_plante->hare, &db_plante->fugl, &db_plante->insekt);
+            if(scanned == 8 && check_db(*db_plante)) {
+                return db_plante;
+            }
         }
-    }
+    } while (strcmp(line, "\r\n") == 0);
     /*Hvis EOF rammes i fgets, eller indscanning fejler returneres en NULL pointer, og den allokerede hukkommelse frigøres*/
     free(db_plante);
     return NULL;
@@ -181,8 +183,8 @@ void prompt_ph(Plante *p) {
                 good_input = 1;
                 break;
             case 'b':
-                clrscr();
-                return 0;
+                good_input = 1;
+                break;
             default:
                 clrscr();
                 printf("Forkert indtastning, prøv igen.\n");
@@ -190,7 +192,6 @@ void prompt_ph(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 void prompt_jord(Plante *p) {
@@ -214,8 +215,8 @@ void prompt_jord(Plante *p) {
                 good_input = 1;
                 break;
             case 'b':
-                clrscr();
-                return 0;
+                good_input = 1;
+                break;
             default:
                 clrscr();
                 printf("Forkert indtastning, prøv igen.\n");
@@ -223,7 +224,6 @@ void prompt_jord(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 void prompt_fugt(Plante *p) {
@@ -243,8 +243,8 @@ void prompt_fugt(Plante *p) {
                 good_input = 1;
                 break;
             case 'b':
-                clrscr();
-                return 0;
+                good_input = 1;
+                break;
             default:
                 clrscr();
                 printf("Forkert indtastning, prøv igen.\n");
@@ -252,7 +252,6 @@ void prompt_fugt(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 void prompt_hjort(Plante *p) {
@@ -267,8 +266,7 @@ void prompt_hjort(Plante *p) {
             good_input = 1;
         }
         else if(input == 'b') {
-            clrscr();
-            return 0;
+            good_input = 1;
         }
         else {
             clrscr();
@@ -276,7 +274,6 @@ void prompt_hjort(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 void prompt_hare(Plante *p) {
@@ -291,8 +288,7 @@ void prompt_hare(Plante *p) {
             good_input = 1;
         }
         else if(input == 'b') {
-            clrscr();
-            return 0;
+            good_input = 1;
         }
         else {
             clrscr();
@@ -300,7 +296,6 @@ void prompt_hare(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 void prompt_fugl(Plante *p) {
@@ -315,8 +310,7 @@ void prompt_fugl(Plante *p) {
             good_input = 1;
         }
         else if(input == 'b') {
-            clrscr();
-            return 0;
+            good_input = 1;
         }
         else {
             clrscr();
@@ -324,7 +318,6 @@ void prompt_fugl(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 void prompt_insekt(Plante *p) {
@@ -339,8 +332,7 @@ void prompt_insekt(Plante *p) {
             good_input = 1;
         }
         else if(input == 'b') {
-            clrscr();
-            return 0;
+            good_input = 1;
         }
         else {
             clrscr();
@@ -348,7 +340,6 @@ void prompt_insekt(Plante *p) {
         }
     }
     clrscr();
-    return 1;
 }
 
 int evaluate_score(Plante db_p, Plante input_p) {
