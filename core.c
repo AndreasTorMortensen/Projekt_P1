@@ -5,7 +5,6 @@
 #include <string.h>
 
 
-
 Plante *parse_db(FILE *db) {
     Plante *db_plante = (Plante*) calloc(1, sizeof(Plante));
     int scanned = 0;
@@ -167,7 +166,7 @@ void prompt_ph(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("Indtast jordens surhed:\n1. Basisk\n2. Neutral\n3. Sur\n");
+        printf("Vælg jordens pH værdi:\n1 - Basisk\n2 - Neutral\n3 - Sur\nb - Tilbage\n");
         input = get_single_char();
         switch(input) {
             case '1':
@@ -199,7 +198,7 @@ void prompt_jord(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("Indtast jordens hårdhed:\n1. Let\n2. Blandet\n3. Hård\n");
+        printf("Vælg jordens hårdhed:\n1 - Let\n2 - Blandet\n3 - Hård\nb - Tilbage\n");
         input = get_single_char();
         switch(input) {
             case '1':
@@ -231,7 +230,7 @@ void prompt_fugt(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("Indtast jordens fugtighed:\n1. Tør\n2. Våd\n");
+        printf("Vælg jordens fugtighed:\n1 - Tør\n2 - Våd\nb - Tilbage\n");
         input = get_single_char();
         switch(input) {
             case '1':
@@ -259,7 +258,7 @@ void prompt_hjort(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække hjorte?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække hjorte? Tast 'b' for at gå tilbage.\n");
         input = get_single_char();
         if(input >= '0' && input <= '5') {
             p->hjort = input - '0';
@@ -281,7 +280,7 @@ void prompt_hare(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække hare?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække hare? Tast 'b' for at gå tilbage.\n");
         input = get_single_char();
         if(input >= '0' && input <= '5') {
             p->hare = input - '0';
@@ -303,7 +302,7 @@ void prompt_fugl(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække fugle?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække fugle? Tast 'b' for at gå tilbage.\n");
         input = get_single_char();
         if(input >= '0' && input <= '5') {
             p->fugl = input - '0';
@@ -325,7 +324,7 @@ void prompt_insekt(Plante *p) {
     int good_input = 0;
 
     while(!good_input) {
-        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække insekter?\n");
+        printf("På en skala fra 0-5 hvor vigtig er det at tiltrække insekter? Tast 'b' for at gå tilbage.\n");
         input = get_single_char();
         if(input >= '0' && input <= '5') {
             p->insekt = input - '0';
