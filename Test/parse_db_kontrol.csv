@@ -1,0 +1,7 @@
+TEST_OK,basisk;neutral,hård,våd,3,3,3,3
+
+TEST_TOM,sur,blandet,våd,0,0,3,2
+TEST_FORMAT,sur,tør,3,3,2,0
+TEST_INDHOLD,bsisk,hård,våd,0,0,3,2
+TEST_INDHOLD2,neutral,abcdefghijklmnopqrst,tør,1,0,3,3
+TEST_INDHOLD3,basisk;neutral,blandet;hård,'¨´,1,0,0,3

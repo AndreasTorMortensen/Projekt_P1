@@ -13,7 +13,7 @@ void clrscr();
 void insert_plant(Plante *p_arr, Plante p, int n);
 
 /*Udprinter hver plante i arrayet p_arr på listeform*/
-void print_array(Plante *p_arr, int n);
+void print_array(Plante *p_arr, Plante input_p, int n);
 
 /*Sammenligner to Plante structs i forhold til deres score*/
 int compare_plants(const void *a, const void *b);

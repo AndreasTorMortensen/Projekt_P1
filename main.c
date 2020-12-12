@@ -5,12 +5,16 @@
 #include "plante.h"
 #define DB_FILE "db_biodiversitet.csv"
 
-
 void suggest_plants(FILE *db, int n);
 
 int main(void) {
     FILE *db = fopen(DB_FILE, "r");
     char input;
+    
+    /*Ændre den brugte codepage i Windows terminal til UTF-8, hvis der kompileres til Windows*/
+    #ifdef _WIN32
+    system("chcp 65001");
+    #endif
 
     do {
         clrscr();
@@ -30,8 +34,6 @@ void suggest_plants(FILE *db, int n) {
     Plante *p_arr = (Plante*) calloc(n, sizeof(Plante));
     int db_counter = 1;
 
-    memset(p_arr, 0, n*sizeof(Plante));
-
     if((input_p = parse_input()) != NULL) {
 
         while((db_p = parse_db(db)) != NULL) {
@@ -45,7 +47,7 @@ void suggest_plants(FILE *db, int n) {
 
         if(feof(db)) {
             qsort(p_arr, n, sizeof(Plante), compare_plants);
-            print_array(p_arr, n);
+            print_array(p_arr, *input_p, n);
         }
         else {
             printf("End of database was not reached, failed at line: %d\n", db_counter);
