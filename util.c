@@ -40,13 +40,23 @@ void insert_plant(Plante *p_arr, Plante p, int n) {
     }   
 }
 
-void print_array(Plante *p_arr, int n) {
-    int i;
-    printf("%-2s %-25s Score\n", "#","Plante ID");
+void print_array(Plante *p_arr, Plante input_p,int n) {
+    int i, found = 1;
+
+    printf("Dine indtastede værdier:\n");
+    printf("pH: %s - Jord: %s - Fugt: %s\n", input_p.ph, input_p.jord, input_p.fugt);
+    printf("Hjort: %d - Hare: %d - Fugl: %d - Insekt: %d\n\n", input_p.hjort, input_p.hare, input_p.fugl, input_p.insekt);
+
+    printf("Matchende planter:\n");
+    printf("%-2s %-25sScore\n", "#","Plante ID");
     for(i = 0; i < n; i++) {
         if(p_arr[i].score > 0) {
             printf("%-2d %-25s %d\n", i+1, p_arr[i].id, p_arr[i].score);
+            found++;
         }
+    }
+    if(found == 0) {
+        printf("Der blev ikke fundet nogen matches i database\n");
     }
 }
 
