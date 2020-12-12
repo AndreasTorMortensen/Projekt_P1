@@ -41,7 +41,7 @@ void insert_plant(Plante *p_arr, Plante p, int n) {
 }
 
 void print_array(Plante *p_arr, Plante input_p,int n) {
-    int i, found = 1;
+    int i, found = 0;
 
     printf("Dine indtastede værdier:\n");
     printf("pH: %s - Jord: %s - Fugt: %s\n", input_p.ph, input_p.jord, input_p.fugt);
@@ -56,7 +56,10 @@ void print_array(Plante *p_arr, Plante input_p,int n) {
         }
     }
     if(found == 0) {
-        printf("Der blev ikke fundet nogen matches i database\n");
+        printf("Der blev ikke fundet nogen matches i database\n\n");
+    }
+    else {
+        printf("Der blev fundet %d matches i databasen.\n\n", found);
     }
 }
 
