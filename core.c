@@ -106,15 +106,14 @@ int check_ph(Plante p) {
                 return 0;
             }
             else if(p.ph[i] == '\0') {
-                break;
+                return 1;
             }
             memset(buffer, 0, sizeof(buffer));
             prev_i = i+1;
         }
         i++;
     }
-
-    return 1;
+    return 0;
 }
 
 int check_jord(Plante p) {
@@ -128,15 +127,14 @@ int check_jord(Plante p) {
                 return 0;
             }
             else if(p.jord[i] == '\0') {
-                break;
+                return 1;
             }
             memset(buffer, 0, sizeof(buffer));
             prev_i = i+1;
         }
         i++;
     }
-
-    return 1;
+    return 0;
 }
 
 int check_fugt(Plante p) {
@@ -150,15 +148,14 @@ int check_fugt(Plante p) {
                 return 0;
             }
             else if(p.fugt[i] == '\0') {
-                break;
+                return 1;
             }
             memset(buffer, 0, sizeof(buffer));
             prev_i = i+1;
         }
         i++;
     }   
-
-    return 1;
+    return 0;
 }
 
 void prompt_ph(Plante *p) {
