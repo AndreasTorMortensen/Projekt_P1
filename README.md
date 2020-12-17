@@ -1,5 +1,5 @@
 # Projekt_P1 #
-Projekt repo til gruppe A307b - P1 projekt om biodiversitet fra AAU 
+Projekt repository til gruppe A307b - P1 projekt om biodiversitet fra AAU 
 I dette repository findes alt det materiale, der indgår i vores programmerede løsning, til projektet om biodiversitet. Tilhørende rapport udvikles i overleaf, og kan ses på følgende link:
 https://www.overleaf.com/read/tqzfxgqpjwjc
 
