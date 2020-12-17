@@ -13,19 +13,24 @@ Plante *parse_db(FILE *db);
   Hvis brugeren afbryder dialogen returneres en NULL pointer*/
 Plante *parse_input();
 
-/*TODO KOMMENTAR*/
+/*Boolsk funktion til verifikation af input.
+  Hvis inputtet kan bruges i parse_db returneres 1, hvis ikke 0*/
 int check_input(Plante p);
 
-/*TODO KOMMENTAR*/
+/*Boolsk funktion til indholdstjek af læst plante fra database
+  Hvis indholdet er ok returneres 1, hvis ikke 0*/
 int check_db(Plante p);
 
-/*TODO KOMMENTAR*/
+/*Boolsk funktion til indholdstjek af pH variablen af læst plante fra database
+  Hvis indholdet er ok returneres 1, hvis ikke 0*/
 int check_ph(Plante p);
 
-/*TODO KOMMENTAR*/
+/*Boolsk funktion til indholdstjek af jord variablen af læst plante fra database
+  Hvis indholdet er ok returneres 1, hvis ikke 0*/
 int check_jord(Plante p);
 
-/*TODO KOMMENTAR*/
+/*Boolsk funktion til indholdstjek af fugt variablen af læst plante fra database
+  Hvis indholdet er ok returneres 1, hvis ikke 0*/
 int check_fugt(Plante p);
 
 /*Prompter og assigner brugerens input til ph variablen af planten overført som parameter
