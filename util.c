@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #ifdef _WIN32
 #define CLEAR_STR "cls"
@@ -19,7 +20,7 @@ char get_single_char() {
         while(getchar() != '\n');
     }
     /*Hvis 2. karakter i line ikke er new-line returneres '\0'*/
-    return line[1] == '\n' ? line[0] : '\0';
+    return line[1] == '\n' ? tolower(line[0]) : '\0';
 }
 
 void clrscr() {
@@ -48,7 +49,7 @@ void print_array(Plante *p_arr, Plante input_p,int n) {
     printf("Hjort: %d - Hare: %d - Fugl: %d - Insekt: %d\n\n", input_p.hjort, input_p.hare, input_p.fugl, input_p.insekt);
 
     printf("Matchende planter:\n");
-    printf("%-2s %-25sScore\n", "#","Plante ID");
+    printf("%-2s %-25s Score\n", "#","Plante ID");
     for(i = 0; i < n; i++) {
         if(p_arr[i].score > 0) {
             printf("%-2d %-25s %d\n", i+1, p_arr[i].id, p_arr[i].score);
