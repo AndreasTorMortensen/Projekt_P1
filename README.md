@@ -8,9 +8,9 @@ Vi bruger gnu compiler collection (gcc) for at kompiler vores program.
 Kommando: ```gcc -g -ansi -Wall -pedantic main.c core.c util.c -o main ```
 
 ## Oversigt ## 
-Vores Test og validering for programmet kan findes i mappen **Test**.
-Programmets **hiraki** tilhørende **flowcharts** samt en oversigt over **komponenterne i programmet** kan findes i mappen **bilag**
-Vores **database** er lageret som en .csv fil med navn **db_biodiversitet.csv**
+Vores Test og validering for programmet kan findes i mappen **Test**  
+Programmets **hiraki** tilhørende **flowcharts** samt en oversigt over **komponenterne i programmet** kan findes i mappen **bilag**  
+Vores **database** er lageret som en .csv fil i hovedmappen med navn **db_biodiversitet.csv**
 
 Indehold af **Main.c**
 * main
