@@ -5,7 +5,7 @@ https://www.overleaf.com/read/tqzfxgqpjwjc
 
 ## Kompiler ## 
 Vi bruger gnu compiler collection (gcc) for at kompiler vores program. 
-Kommando: ```gcc -g -ansi -Wall -pedantic main.c core.c util.c -o main -lm ```
+Kommando: ```gcc -g -ansi -Wall -pedantic main.c core.c util.c -o main ```
 
 ## Oversigt ## 
 Vores Test og validering for programmet kan findes i mappen **Test**.
