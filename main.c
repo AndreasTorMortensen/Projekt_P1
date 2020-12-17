@@ -28,7 +28,8 @@ int main(void) {
     return 0;
 }
 
-/*TODO kommentar*/
+/*Finder og printer n antal passende planter i *db filen.
+  Brugeren promptes for input m. parse_input som herefter bruges til at finde matches med parse_db*/
 void suggest_plants(FILE *db, int n) {
     Plante *db_p, *input_p;
     Plante *p_arr = (Plante*) calloc(n, sizeof(Plante));
