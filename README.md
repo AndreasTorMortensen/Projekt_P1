@@ -38,5 +38,6 @@ Indhold af **util.c**
 Indhold af **plante.h**
 * Struct Plante
 
-# Compiling # 
-For at compiler vores programm 
+# Kompiler # 
+Vi bruger gnu compiler collection (gcc) for at kompiler vores program. 
+Kommando: ```gcc -g -ansi -Wall -pedantic main.c core.c util.c -o main -lm ````
