@@ -3,7 +3,11 @@ Projekt repository til gruppe A307b - P1 projekt om biodiversitet fra AAU
 I dette repository findes alt det materiale, der indgår i vores programmerede løsning, til projektet om biodiversitet. Tilhørende rapport udvikles i overleaf, og kan ses på følgende link:
 https://www.overleaf.com/read/tqzfxgqpjwjc
 
-# Oversigt # 
+## Kompiler ## 
+Vi bruger gnu compiler collection (gcc) for at kompiler vores program. 
+Kommando: ```gcc -g -ansi -Wall -pedantic main.c core.c util.c -o main -lm ```
+
+## Oversigt ## 
 Vores Test og validering for programmet kan findes i mappen **Test**.
 Programmets **hiraki** tilhørende **flowcharts** samt en oversigt over **komponenterne i programmet** kan findes i mappen **bilag**
 
@@ -37,7 +41,3 @@ Indhold af **util.c**
 
 Indhold af **plante.h**
 * Struct Plante
-
-# Kompiler # 
-Vi bruger gnu compiler collection (gcc) for at kompiler vores program. 
-Kommando: ```gcc -g -ansi -Wall -pedantic main.c core.c util.c -o main -lm ````
